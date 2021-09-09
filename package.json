@@ -1,0 +1,17 @@
+{
+  "name": "time-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for generating unix-format timestamps from slash commands",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "if-shouldrs",
+  "license": "CC-BY-NC-2.5",
+  "dependencies": {
+    "discord.js": "^13.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  }
+}
