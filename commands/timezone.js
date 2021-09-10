@@ -24,7 +24,7 @@ module.exports = {
         const tz = interaction.options.getString("tz");
         if (tz === null) {
             // eslint-disable-next-line func-names
-            db.get(interaction.user.id, function (err, tz) {
+            db.get(interaction.user.id, function (err, tzCode) {
                 let response;
                 if (err) {
                     // No timezone given and no timezone in db, help user find one
@@ -32,10 +32,20 @@ module.exports = {
                         "Please set your timezone to a valid tz code (see here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)";
                 } else {
                     // No timezone given, inform user of current timezone
-                    response = `Your current timezone is \`${tz}\`.`;
+                    response = `Your current timezone is \`${tzCode}\`.`;
                 }
                 interaction.reply({ content: response, ephemeral: true });
             });
+            return;
+        }
+
+        // Validate timezone
+        try {
+            dayjs().tz(tz);
+        } catch (error) {
+            const response =
+                "Invalid timezone used. Please use a valid tz code (see here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)";
+            await interaction.reply({ content: response, ephemeral: true });
             return;
         }
 
