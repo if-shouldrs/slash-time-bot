@@ -14,11 +14,12 @@ const { db } = require("../db/dbaccess");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("timezone")
-        .setDescription("Set your timezone.")
+        .setDescription("Set or check your timezone.")
         .addStringOption((option) =>
             option
                 .setName("tz")
-                .setDescription("The TZ Database name for your timezone"),
+                .setDescription("The TZ Database name for your timezone")
+                .setRequired(false),
         ),
     async execute(interaction) {
         const tz = interaction.options.getString("tz");

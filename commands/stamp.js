@@ -31,7 +31,7 @@ function parseDate(dateTime, tz) {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("stamp")
-        .setDescription("Convert date string to discord unix timestamp.")
+        .setDescription("Convert date/time string to discord unix timestamp.")
         .addStringOption((option) =>
             option
                 .setName("date-time")
@@ -42,11 +42,11 @@ module.exports = {
             option
                 .setName("format")
                 .setDescription("Format to use when presenting the timestamp.")
-                .addChoice("standard", "f")
-                .addChoice("short date", "d")
-                .addChoice("time", "t")
-                .addChoice("remaining", "R")
-                .addChoice("written date", "D"),
+                .addChoice("standard (f)", "f")
+                .addChoice("short date (d)", "d")
+                .addChoice("time (t)", "t")
+                .addChoice("remaining (R)", "R")
+                .addChoice("written date (D)", "D"),
         ),
     async execute(interaction) {
         const dateStr = interaction.options.getString("date-time");
