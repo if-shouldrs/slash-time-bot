@@ -3,6 +3,10 @@
     "version": "1.0.0",
     "description": "Discord bot for generating unix-format timestamps from slash commands",
     "main": "index.js",
+    "scripts": {
+        "lint": "eslint . && prettier . -c",
+        "lint:fix": "eslint . --fix && prettier . --write"
+    },
     "author": "if-shouldrs",
     "license": "CC-BY-NC-2.5",
     "dependencies": {
@@ -12,6 +16,11 @@
         "discord.js": "^13.1.0"
     },
     "devDependencies": {
-        "eslint": "^7.32.0"
+        "eslint": "^7.32.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.24.2",
+        "eslint-plugin-prettier": "^4.0.0",
+        "prettier": "^2.4.0"
     }
 }

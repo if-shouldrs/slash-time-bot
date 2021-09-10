@@ -12,6 +12,7 @@ const commandFiles = fs
     .filter((file) => file.endsWith(".js"));
 
 for (const file of commandFiles) {
+    // eslint-disable-next-line import/no-dynamic-require, global-require
     const command = require(`./commands/${file}`);
     // Set a new item in the Collection
     // With the key as the command name and the value as the exported module
