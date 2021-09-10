@@ -5,7 +5,7 @@ const { clientId, token } = require("../config.json");
 
 const commands = [];
 const commandFiles = fs
-    .readdirSync("./commands")
+    .readdirSync("./src/commands")
     .filter((file) => file.endsWith(".js"));
 
 for (const file of commandFiles) {
