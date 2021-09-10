@@ -128,3 +128,5 @@ dist
 
 # Discord.js
 config.json
+timezone-db/
+feature-tests/

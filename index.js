@@ -1,7 +1,6 @@
 // Require the necessary discord.js classes
 const fs = require("fs");
 const { Client, Collection, Intents } = require("discord.js");
-const { token } = require("./config.json");
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
@@ -42,5 +41,18 @@ client.on("interactionCreate", async (interaction) => {
     }
 });
 
-// Login to Discord with your client's token
+// DayJS imports
+const dayjs = require("dayjs");
+const utc = require("dayjs/plugin/utc");
+const timezone = require("dayjs/plugin/timezone");
+// Enable timezone plugin
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+// Set default timezone to UTC
+dayjs.tz.setDefault("GMT");
+
+// Login to Discord with bot's token
+const { token } = require("./config.json");
+
 client.login(token);
