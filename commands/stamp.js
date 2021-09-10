@@ -12,13 +12,20 @@ dayjs.extend(timezone);
 const { db } = require("../db/dbaccess");
 
 // Returns dayjs date with added support of time strings only, using current day
-function parseDate(dateTime) {
-    let ret = dayjs(dateTime);
-    if (Number.isNaN(ret.$D)) {
+function parseDate(dateTime, tz) {
+    // If dayjs can't find a date in the given string
+    if (!dayjs(dateTime).isValid()) {
+        // Get current date, append string to the end, and try again
         const currentDate = dayjs().format("YYYY/MM/DD");
-        ret = dayjs(`${currentDate} ${dateTime}`);
+        // Return null if dateTime is still invalid
+        if (!dayjs(`${currentDate} ${dateTime}`).isValid()) {
+            return null;
+        }
+        // Parse for the 3rd time (sucks for performance but best for dev time)
+        return dayjs.tz(`${currentDate} ${dateTime}`, tz);
     }
-    return ret;
+    // Discard previous parsing and parse again using timezone (avoids exception)
+    return dayjs.tz(dateTime, tz);
 }
 
 module.exports = {
@@ -49,7 +56,7 @@ module.exports = {
         }
 
         // eslint-disable-next-line func-names
-        db.get(interaction.user.id, function (err, value) {
+        db.get(interaction.user.id, function (err, tz) {
             if (err) {
                 if (err.notFound) {
                     // Return since user hasn't set a timezone yet
@@ -67,7 +74,17 @@ module.exports = {
             }
 
             // Fetch and return timestamp based on user's timezone
-            const unix = parseDate(dateStr).tz(value).unix();
+            const dayjsDateTime = parseDate(dateStr, tz);
+            if (dayjsDateTime === null) {
+                // Handle invalid dateTime entries
+                const response =
+                    "The date/time you inserted is not in a valid format.";
+                interaction.reply({ content: response, ephemeral: true });
+                return;
+            }
+
+            // Generate discord timestamp reply
+            const unix = dayjsDateTime.unix();
             const stamp = `<t:${unix}:${format}>`;
             const response = `${stamp}\n\`${stamp}\``;
             interaction.reply({ content: response, ephemeral: true });
