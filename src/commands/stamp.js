@@ -9,7 +9,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 // DB access imports
-const { db } = require("../db/dbaccess");
+const { db } = require("../db/db-access");
 
 // Returns dayjs date with added support of time strings only, using current day
 function parseDate(dateTime, tz) {

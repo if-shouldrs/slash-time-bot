@@ -1,5 +1,5 @@
 {
-    "cSpell.words": ["dbaccess", "discordjs", "testme"],
+    "cSpell.words": ["discordjs"],
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },

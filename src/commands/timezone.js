@@ -9,7 +9,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 // DB access imports
-const { db } = require("../db/dbaccess");
+const { db } = require("../db/db-access");
 
 module.exports = {
     data: new SlashCommandBuilder()

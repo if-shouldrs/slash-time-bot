@@ -53,6 +53,6 @@ dayjs.extend(timezone);
 dayjs.tz.setDefault("GMT");
 
 // Login to Discord with bot's token
-const { token } = require("./config.json");
+const { token } = require("../config.json");
 
 client.login(token);
