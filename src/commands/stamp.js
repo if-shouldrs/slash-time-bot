@@ -49,6 +49,8 @@ module.exports = {
                 .addChoice("written date (D)", "D"),
         ),
     async execute(interaction) {
+        // Make message permanent (and "globally" visible) if sent in a DM
+        const ephemeral = interaction.guildId !== null;
         const dateStr = interaction.options.getString("date-time");
         let format = interaction.options.getString("format");
         if (format === null) {
@@ -61,7 +63,7 @@ module.exports = {
                 if (err.notFound) {
                     // Return since user hasn't set a timezone yet
                     const response = "Please set your timezone first!";
-                    interaction.reply({ content: response, ephemeral: true });
+                    interaction.reply({ content: response, ephemeral });
                     return;
                 }
                 // I/O or other error, pass it up the callback chain
@@ -69,7 +71,7 @@ module.exports = {
                 console.log(err);
                 const response =
                     "Something went wrong fetching your timezone data.";
-                interaction.reply({ content: response, ephemeral: true });
+                interaction.reply({ content: response, ephemeral });
                 return;
             }
 
@@ -79,7 +81,7 @@ module.exports = {
                 // Handle invalid dateTime entries
                 const response =
                     "The date/time you inserted is not in a valid format.";
-                interaction.reply({ content: response, ephemeral: true });
+                interaction.reply({ content: response, ephemeral });
                 return;
             }
 
@@ -87,7 +89,7 @@ module.exports = {
             const unix = dayjsDateTime.unix();
             const stamp = `<t:${unix}:${format}>`;
             const response = `${stamp}\n\`${stamp}\``;
-            interaction.reply({ content: response, ephemeral: true });
+            interaction.reply({ content: response, ephemeral });
         });
     },
 };

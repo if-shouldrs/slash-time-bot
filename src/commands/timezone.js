@@ -22,6 +22,8 @@ module.exports = {
                 .setRequired(false),
         ),
     async execute(interaction) {
+        // Make message permanent (and "globally" visible) if sent in a DM
+        const ephemeral = interaction.guildId !== null;
         const tz = interaction.options.getString("tz");
         if (tz === null) {
             // eslint-disable-next-line func-names
@@ -35,7 +37,7 @@ module.exports = {
                     // No timezone given, inform user of current timezone
                     response = `Your current timezone is \`${tzCode}\`.`;
                 }
-                interaction.reply({ content: response, ephemeral: true });
+                interaction.reply({ content: response, ephemeral });
             });
             return;
         }
@@ -46,7 +48,7 @@ module.exports = {
         } catch (error) {
             const response =
                 "Invalid timezone used. Please use a valid tz code (see here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)";
-            await interaction.reply({ content: response, ephemeral: true });
+            await interaction.reply({ content: response, ephemeral });
             return;
         }
 
@@ -55,6 +57,6 @@ module.exports = {
 
         // Inform user of successful change
         const response = `Timezone successfully set to \`${tz}\`.`;
-        await interaction.reply({ content: response, ephemeral: true });
+        await interaction.reply({ content: response, ephemeral });
     },
 };
