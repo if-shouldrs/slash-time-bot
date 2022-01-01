@@ -1,6 +1,6 @@
 # SlashTime - Discord bot for generating timestamps
 
-SlashTime is a bot that converts human-readable date/time strings into discord's unix-based timestamps which display differently based on the user's locale and local time, using discord's slash/application commands.
+SlashTime is a bot written for Node.js that converts human-readable date/time strings into discord's unix-based timestamps which display differently based on the user's locale and local time, using discord's slash/application commands.
 
 # Usage
 
@@ -9,8 +9,6 @@ First use `/timezone <tz>` to associate a timezone with your discord user. This 
 We use this instead of UTC offsets in order to support daylight savings and instead of timezones like "Pacific Standard Time" and "British Summer Time" because it's what `dayjs` (the library we use for handling dates) handles best.
 
 To produce a timestamp, you use `/stamp <datetime> <format>`. The bot then replies to you privately with the discord timestamp string that matches what you inputted. Unfortunately, `<datetime>` always reads dates in the order `01/01/2021` as `mm/dd/yyyy` and changing that would require a lot of spaghetti code. If you're a sane person that likes typing days first, the best thing I can recommend is typing it `yyyy/mm/dd` which is the most accepted/unambiguous date format and is just the reverse of what you're used to. For `<format>`, it's a multiple choice selection with descriptive names for each option, including the letter that will be displayed in the discord timestamp. I only included 5/7 format options to reduce clutter and because the 2 remaining ones are duplicates with a bit more data. Since the bot simply replies to you the timestamp in private, you can just set one of the remaining 2 letters if you want.
-
-The project is still in early stages so commands & names may still change.
 
 # Setup Notes
 
