@@ -1,3 +1,5 @@
+As discord has introduced `@time` for this exact purpose, this bot is now deprecated.
+
 # SlashTime - Discord bot for generating timestamps
 
 SlashTime is a bot written for Node.js that converts human-readable date/time strings into discord's unix-based timestamps which display differently based on the user's locale and local time, using discord's slash/application commands.
